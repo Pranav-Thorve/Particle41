@@ -9,9 +9,12 @@ class SimpleTimeService(BaseHTTPRequestHandler):
             self.end_headers()
             return
 
+        xff = self.headers.get("X-Forwarded-For")
+        client_ip = xff.split(",")[0].strip() if xff else self.client_address[0]
+
         response = {
             "timestamp": datetime.utcnow().isoformat(),
-            "ip": self.client_address[0]
+            "ip": client_ip
         }
 
         self.send_response(200)
@@ -20,5 +23,4 @@ class SimpleTimeService(BaseHTTPRequestHandler):
         self.wfile.write(json.dumps(response).encode())
 
 if __name__ == "__main__":
-    server = HTTPServer(("0.0.0.0", 8080), SimpleTimeService)
-    server.serve_forever()
+    HTTPServer(("0.0.0.0", 8080), SimpleTimeService).serve_forever()
