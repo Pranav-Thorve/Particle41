@@ -80,3 +80,27 @@ variable "eks-cluster-name" {
 variable "eks-version" {
   type = string
 }
+
+variable "node-instance-type" {
+  type = string
+}
+
+variable "desired-nodes" {
+  type = number
+}
+
+variable "max-nodes" {
+  type = number
+}
+
+variable "min-nodes" {
+  type = number
+}
+
+variable "eks-image" {
+  type = string
+}
+
+variable "k8s-label" {
+  type = string
+}

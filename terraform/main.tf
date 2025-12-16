@@ -1,4 +1,3 @@
-
 module "vpc" {
   source = "./vpc"
   igw-name = var.igw-name
@@ -23,4 +22,15 @@ module "eks" {
   eks-cluster-name = var.eks-cluster-name
   eks-version = var.eks-version
   subnets = [module.vpc.private_subnet_id1, module.vpc.private_subnet_id2]
+  node-instance-type = var.node-instance-type
+  desired-nodes = var.desired-nodes
+  max-nodes = var.max-nodes
+  min-nodes = var.min-nodes
+}
+
+module "app" {
+  source = "./simpletimeservice"
+  eks-image = var.eks-image
+  eks-cluster-name = var.eks-cluster-name
+  k8s-label = var.k8s-label
 }
