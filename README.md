@@ -41,10 +41,8 @@ Example response:
 
 
 **Docker Image**
-- Container Best Practices
 - Runs as a non-root user
 - Uses a minimal base image
-- Single command to build and run
 - No secrets baked into the image
 
 
